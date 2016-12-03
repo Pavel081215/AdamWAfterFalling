@@ -56,15 +56,27 @@ object Main extends App with SimpleRoutingApp {
     }
   }
 
+  def secure(route: Route) = {
+    parameter("password") { pass =>
+      if (pass == "secret") {
+        route
+      } else {
+        ctx =>
+      }
+    }
+  }
+
 
   startServer(interface = "Localhost", port = 8080) {
-      helloroute ~
+    helloroute ~
       helloroute2 ~
       burnRoute ~
       getJson {
         path("list" / "all") {
-          complete {
-            Drug.toJson(plentyOfDrugs)
+          secure {
+            complete {
+              Drug.toJson(plentyOfDrugs)
+            }
           }
         }
       } ~

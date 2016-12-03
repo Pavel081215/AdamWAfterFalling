@@ -1,12 +1,13 @@
 package com.zagrebelnyy.spray.server
 
-import akka.actor.{Props, Actor, ActorSystem}
-import akka.util.Timeout
-import com.zagrebelnyy.spray._
-import spray.http.MediaTypes
+import akka.actor.{Actor, ActorSystem, Props}
 import akka.pattern.ask
-import scala.concurrent.duration._
+import akka.util.Timeout
+import com.zagrebelnyy.spray.{Drug, DrugSecond}
+import spray.http.MediaTypes
 import spray.routing.{RequestContext, Route, SimpleRoutingApp}
+
+import scala.concurrent.duration._
 
 
 object Main extends App with SimpleRoutingApp {

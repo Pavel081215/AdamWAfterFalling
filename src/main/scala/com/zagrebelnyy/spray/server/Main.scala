@@ -4,30 +4,36 @@ import akka.actor.ActorSystem
 import com.zagrebelnyy.spray._
 import spray.http.MediaTypes
 
-import spray.routing.SimpleRoutingApp
+import spray.routing.{Route, SimpleRoutingApp}
 
 
 object Main extends App with SimpleRoutingApp {
   implicit val actorSystem = ActorSystem()
   var plentyOfDrugs = Drug.drugs
 
-  //lazy val helloro
+  lazy val helloroute = {
+    path("hello") {
+      complete {
+        "Welcome to my main)))))))))))))))))"
+      }
+    }
+  }
+
+  def getJson(route: Route): Route = {
+    get {
+      respondWithMediaType(MediaTypes.`application/json`) {
+        route
+      }
+    }
+  }
 
   //startServer(interface = "Localhost", port = 8080) {
   startServer(interface = "Localhost", port = 8080) {
-    get {
-      path("hello") {
-        complete {
-          "Welcome to my main)))))))))))))))))"
-        }
-      }
-    } ~
-      get {
+    helloroute ~
+      getJson {
         path("list" / "all") {
-          respondWithMediaType(MediaTypes.`application/json`) {
-            complete {
-              Drug.toJson(plentyOfDrugs)
-            }
+          complete {
+            Drug.toJson(plentyOfDrugs)
           }
         }
       } ~

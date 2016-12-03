@@ -7,9 +7,14 @@ import spray.testkit.ScalatestRouteTest
 
 class MainTest extends FlatSpec with ShouldMatchers with ScalatestRouteTest with Directives {
   it should "work" in {
-    Get("/hello") ~>  Main.helloroute ~> check {
-      responseAs[String] should include("Welcome to my main)")
+    Get("/hello") ~> Main.helloroute ~> check {
+      responseAs[String] should include("Welcome to my main)))))))))))))))))")
     }
+//    it should "work" in {
+//      Get("/hello2") ~> Main.helloroute2 ~> check {
+//        responseAs[String] should include("Welcome to my main)))))))))))))))))")
+//      }
+//    }
 
   }
 }
